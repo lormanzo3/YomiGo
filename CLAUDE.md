@@ -17,6 +17,7 @@
 ## Important: Teaching Mode
 
 **The user (Lorenzo) is an entry-level/student programmer.**
+**Lorenzo is Familiar with Ruby, Ruby on Rails adn the MVC structure.** - reference this if it is comparable in a way
 
 When helping with this project, you MUST:
 
@@ -45,16 +46,31 @@ Try implementing this, and let me know if anything is unclear.
 
 ```
 YomiGo/
-├── backend/          # Python FastAPI server
-│   └── app/
-│       └── main.py   # API endpoints
-├── extension/        # React + TypeScript browser extension
-│   ├── src/
-│   └── public/
-└── README.md
+├── backend/                  # Python FastAPI server
+│   ├── app/
+│   │   └── __init__.py       # Makes app/ a Python package
+│   └── requirements.txt      # Python dependencies (fastapi, uvicorn, python-multipart)
+├── extension/                # React + TypeScript browser extension
+│   ├── public/
+│   │   └── manifest.json     # Browser extension config (permissions, popup)
+│   ├── src/                  # Source code (to be written by Lorenzo)
+│   ├── index.html            # Entry HTML - loads React app
+│   ├── package.json          # Node.js dependencies (react, typescript, vite)
+│   ├── tsconfig.json         # TypeScript compiler config
+│   └── vite.config.ts        # Build tool config
+├── .gitignore                # Files Git should ignore
+├── CLAUDE.md                 # This file - AI assistant context
+└── README.md                 # Project setup instructions
 ```
 
-## API Endpoints
+## Files Still To Be Written (by Lorenzo)
+
+- `backend/app/main.py` - FastAPI server with API endpoints
+- `extension/src/main.tsx` - React app entry point
+- `extension/src/App.tsx` - React components (UI)
+- OCR integration, dictionary lookup logic, etc.
+
+## Planned API Endpoints
 
 - `POST /parse` - Image → OCR → Tokens → Definitions
 - `POST /ocr` - Image → Text only
