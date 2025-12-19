@@ -1,1 +1,1 @@
-# YomiGo Backend - Japanese Manga OCR and Dictionary Service
+# This file makes 'app' a Python package

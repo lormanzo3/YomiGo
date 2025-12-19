@@ -2,35 +2,42 @@
 
 Japanese manga OCR and dictionary lookup browser extension.
 
-## Architecture
+## Project Structure
 
-- **Backend**: Python FastAPI server (OCR, parsing, dictionary)
-- **Extension**: React + TypeScript browser extension
+- `backend/` - Python FastAPI server (OCR, parsing, dictionary)
+- `extension/` - React + TypeScript browser extension
 
 ## Setup
 
 ### Backend
 
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 5000
-```
+1. Create a virtual environment:
+   ```bash
+   cd backend
+   python -m venv .venv
+   source .venv/bin/activate  # Windows: .venv\Scripts\activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ### Extension
 
-```bash
-cd extension
-npm install
-npm run build
-```
+1. Install dependencies:
+   ```bash
+   cd extension
+   npm install
+   ```
 
-Load `extension/dist` as unpacked extension in Chrome.
+2. Build the extension:
+   ```bash
+   npm run build
+   ```
 
-## API Endpoints
-
-- `POST /parse` - Image → OCR → Tokens → Definitions
-- `POST /ocr` - Image → Text only
-- `GET /health` - Service status
+3. Load in Chrome:
+   - Go to `chrome://extensions`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `extension/dist` folder
