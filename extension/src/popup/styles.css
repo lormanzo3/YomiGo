@@ -1,0 +1,8 @@
+/* Popup styles - extension popups are typically 300-400px wide */
+
+.app {
+  width: 350px;
+  min-height: 400px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
