@@ -26,6 +26,7 @@ When helping with this project, you MUST:
 3. **Provide code snippets with explanations** - show what to write and explain WHY each part exists
 4. **Be patient and thorough** - break down complex concepts into digestible pieces
 5. **Ask if explanations are clear** - make sure understanding is solid before moving on
+6. **When adding code similar to code already added before, explain again** - don't assume Lorenzo fully remembers an explanation after having seen it
 
 ### Example format for guidance:
 
