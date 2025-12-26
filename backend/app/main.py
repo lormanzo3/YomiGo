@@ -5,6 +5,18 @@ from fugashi import Tagger
 from jamdict import Jamdict
 import io
 
+def katakana_to_hiragana(text):
+      """Convert katakana to hiragana."""
+      result = ""
+      for char in text:
+          code = ord(char)
+          # Katakana range: 0x30A1 (ァ) to 0x30F6 (ヶ)
+          if 0x30A1 <= code <= 0x30F6:
+              # Shift to hiragana range (0x3041 to 0x3096)
+              result += chr(code - 0x60)
+          else:
+              result += char
+      return result
 
 app = FastAPI()
 mocr = MangaOcr()
@@ -38,6 +50,7 @@ async def parse_text(data: dict):
             # Skip dictionary lookup for grammar words
             results.append({
                 "surface": str(word),
+                "reading": katakana_to_hiragana(word.feature.kana or ""),
                 "dictionary_form": dictionary_form,
                 "part_of_speech": pos,
                 "definitions": ["(grammatical particle)"]
@@ -54,6 +67,7 @@ async def parse_text(data: dict):
 
         results.append({
             "surface": str(word), #How it appears in text
+            "reading": katakana_to_hiragana(word.feature.kana or ""),
             "dictionary_form": dictionary_form, #Base form
             "part_of_speech": pos, #Noun, verb, etc.
             "definitions": definitions
