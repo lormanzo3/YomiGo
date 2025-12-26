@@ -31,8 +31,20 @@ async def parse_text(data: dict):
     for word in tagger(text):
         # get the dictionary form of the word
         dictionary_form = word.feature.lemma or str(word)
+        pos = word.pos  # Part of speech, like "助詞,接続助詞,*,*"
 
-        # look up the word
+        # check if it's a particle or auxiliary verb (grammar words)
+        if pos.startswith("助詞") or pos.startswith("助動詞"):
+            # Skip dictionary lookup for grammar words
+            results.append({
+                "surface": str(word),
+                "dictionary_form": dictionary_form,
+                "part_of_speech": pos,
+                "definitions": ["(grammatical particle)"]
+            })
+            continue # Skip to next word
+
+        # For regular words, look up the word
         lookup = jam.lookup(dictionary_form)
 
         definitions = []
@@ -43,7 +55,7 @@ async def parse_text(data: dict):
         results.append({
             "surface": str(word), #How it appears in text
             "dictionary_form": dictionary_form, #Base form
-            "part_of_speech": word.pos, #Noun, verb, etc.
+            "part_of_speech": pos, #Noun, verb, etc.
             "definitions": definitions
         }) # Limit to 3 definitions
 
