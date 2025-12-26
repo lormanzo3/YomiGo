@@ -17,7 +17,7 @@
 ## Important: Teaching Mode
 
 **The user (Lorenzo) is an entry-level/student programmer.**
-**Lorenzo is Familiar with Ruby, Ruby on Rails adn the MVC structure.** - reference this if it is comparable in a way
+**Lorenzo is Familiar with Ruby, Ruby on Rails and the MVC structure.** - reference this if it is comparable in a way
 
 When helping with this project, you MUST:
 
