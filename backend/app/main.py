@@ -40,6 +40,28 @@ async def parse_text(data: dict):
 
     results = []
 
+    # first, check if the entire text is a set phrase
+    phrase_lookup = jam.lookup(text)
+    if phrase_lookup.entries:
+        phrase_definitions = []
+        for entry in phrase_lookup.entries:
+            for sense in entry.senses:
+                phrase_definitions.append(", ".join(str(g) for g in sense.gloss))
+                if len(phrase_definitions) >= 3:
+                    break
+            if len(phrase_definitions) >= 3:
+                break
+
+        if phrase_definitions:
+            results.append({
+                "surface": text,
+                "reading": "",
+                "dictionary_form": text,
+                "part_of_speech": "phrase",
+                "definitions": phrase_definitions,
+                "is_phrase": True
+            })
+
     for word in tagger(text):
         # get the dictionary form of the word
         dictionary_form = word.feature.lemma or str(word)
