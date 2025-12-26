@@ -61,9 +61,13 @@ async def parse_text(data: dict):
         lookup = jam.lookup(dictionary_form)
 
         definitions = []
-        for entry in lookup.entries[:3]:
+        for entry in lookup.entries:
             for sense in entry.senses:
                 definitions.append(", ".join(str(g) for g in sense.gloss))
+                if len(definitions) >= 3:
+                    break # stop inner loop
+            if len(definitions) >= 3:
+                break # Stop outer loop
 
         results.append({
             "surface": str(word), #How it appears in text
