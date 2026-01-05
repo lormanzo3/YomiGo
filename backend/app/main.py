@@ -5,6 +5,8 @@ from fugashi import Tagger
 from jamdict import Jamdict
 import io
 
+from fastapi.middleware.cors import CORSMiddleware
+
 def katakana_to_hiragana(text):
       """Convert katakana to hiragana."""
       result = ""
@@ -19,6 +21,12 @@ def katakana_to_hiragana(text):
       return result
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 mocr = MangaOcr()
 tagger = Tagger()
 jam = Jamdict()
