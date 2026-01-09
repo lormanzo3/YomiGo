@@ -14,11 +14,21 @@ function App() {
   const [extractedText, setExtractedText] = useState<string>('')
   const [tokens, setTokens] = useState<Token[]>([])
   const [isLoading, SetIsLoading] = useState<boolean>(false)
+  const [imagePreview, setImagePreview] = useState<string>('')
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     if (file) {
       setSelectedFile(file)
+
+      // Create an image preview
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setImagePreview(e.target.result as string)
+        }
+      }
+      reader.readAsDataURL(file)
     }
   }
 
@@ -61,6 +71,13 @@ function App() {
         accept="image/*"
         onChange={handleFileChange}
       />
+
+      {imagePreview && (
+        <div>
+          <h3>Image Preview:</h3>
+          <img src={imagePreview} alt="Manga page preview" style={{ maxWidth: '500px' }} />
+        </div>
+      )}
 
       {selectedFile && <p>Selected: {selectedFile.name}</p>}
 
